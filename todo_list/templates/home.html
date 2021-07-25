@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ToDo List</title>
+</head>
+<body>
+	<h1>List of tasks:</h1>
+	{% for task in tasks %}
+		<span>{{task.id}}. {{ task.content }}</span>
+		<br>
+	{% endfor %}
+	<h1>Add Task:</h1>
+	<form method="POST" action="">
+		<p>
+			{{ form.task.label }}
+			{{ form.task() }}
+		</p>
+		<p>
+			{{ form.submit.label }}
+			{{ form.submit() }}
+		</p>
+	</form>
+</body>
+</html>
