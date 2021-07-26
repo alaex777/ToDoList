@@ -10,6 +10,8 @@
 		<span>{{task.id}}. {{ task.content }}</span>
 		<a href="delete/{{task.id}}"><img src="{{ url_for('static', filename='1.jpeg') }}"
          width="16" height="16"></a>
+         <a href="edit/{{task.id}}"><img src="{{ url_for('static', filename='2.png') }}"
+         width="16" height="16"></a>
 		<br>
 	{% endfor %}
 	<h1>Add Task:</h1>

@@ -3,7 +3,7 @@ from todo_list import app, db
 from todo_list.models import Task
 from todo_list.forms import TaskForm
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/home", methods=["GET", "POST"])
 def home():
 	form = TaskForm()
 	tasks = Task.query.all()
@@ -20,6 +20,16 @@ def delete(id):
 	try:
 		db.session.delete(task)
 		db.session.commit()
-		return redirect("/")
+		return redirect("/home")
 	except:
 		return "Error in deleting"
+
+@app.route("/edit/<int:id>",  methods=["GET", "POST"])
+def edit(id):
+	form = TaskForm()
+	if form.is_submitted():
+		task = Task.query.get(id)
+		task.content = str(form.task.data)
+		db.session.commit()
+		return redirect("/home")
+	return render_template("edit.html", form=form)

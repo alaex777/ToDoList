@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Edit</title>
+</head>
+<body>
+	<h1>Edit Task:</h1>
+	<form method="POST" action="">
+		<p>
+			{{ form.task.label }}
+			{{ form.task() }}
+		</p>
+		<p>
+			{{ form.submit.label }}
+			{{ form.submit() }}
+		</p>
+	</form>
+</body>
+</html>
