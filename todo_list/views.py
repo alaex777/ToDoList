@@ -8,10 +8,18 @@ def home():
 	form = TaskForm()
 	tasks = Task.query.all()
 	if form.is_submitted():
-		print(form.task.data)
 		task = Task(content=str(form.task.data))
 		db.session.add(task)
 		db.session.commit()
-		print("Fuuuuck")
 		return redirect(url_for("home"))
 	return render_template("home.html", tasks=tasks, form=form)
+
+@app.route("/delete/<int:id>")
+def delete(id):
+	task = Task.query.get_or_404(id)
+	try:
+		db.session.delete(task)
+		db.session.commit()
+		return redirect("/")
+	except:
+		return "Error in deleting"

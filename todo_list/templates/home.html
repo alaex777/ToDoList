@@ -8,6 +8,8 @@
 	<h1>List of tasks:</h1>
 	{% for task in tasks %}
 		<span>{{task.id}}. {{ task.content }}</span>
+		<a href="delete/{{task.id}}"><img src="{{ url_for('static', filename='1.jpeg') }}"
+         width="16" height="16"></a>
 		<br>
 	{% endfor %}
 	<h1>Add Task:</h1>
