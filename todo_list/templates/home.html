@@ -8,10 +8,15 @@
 	<h1>List of tasks:</h1>
 	{% for task in tasks %}
 		<span>{{task.id}}. {{ task.content }}</span>
-		<a href="delete/{{task.id}}"><img src="{{ url_for('static', filename='1.jpeg') }}"
+		<a href="delete/{{task.id}}"><img src="{{ url_for('static', filename='delete.jpeg') }}"
          width="16" height="16"></a>
-         <a href="edit/{{task.id}}"><img src="{{ url_for('static', filename='2.png') }}"
+         <a href="edit/{{task.id}}"><img src="{{ url_for('static', filename='edit.png') }}"
          width="16" height="16"></a>
+         {% if task.urgency %}
+         	<img src="{{ url_for('static', filename='important.png') }}" width="16" height="16">
+         {% else %}
+         	<img src="{{ url_for('static', filename='not important.png') }}" width="16" height="16">
+         {% endif %}
 		<br>
 	{% endfor %}
 	<h1>Add Task:</h1>
@@ -19,6 +24,10 @@
 		<p>
 			{{ form.task.label }}
 			{{ form.task() }}
+		</p>
+		<p>
+			{{ form.urgency.label }}
+			{{ form.urgency() }}
 		</p>
 		<p>
 			{{ form.submit.label }}

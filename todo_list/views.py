@@ -8,7 +8,7 @@ def home():
 	form = TaskForm()
 	tasks = Task.query.all()
 	if form.is_submitted():
-		task = Task(content=str(form.task.data))
+		task = Task(content=str(form.task.data), urgency=str(form.urgency.data))
 		db.session.add(task)
 		db.session.commit()
 		return redirect(url_for("home"))
