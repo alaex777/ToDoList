@@ -5,18 +5,28 @@
 	<title>ToDo List</title>
 </head>
 <body>
+	<div class="navbar-nav" style="float:right;">
+      <a class="nav-item nav-link" href="/login">Login</a>
+      <a class="nav-item nav-link" href="/register">Register</a>
+      <h1>Users:</h1>
+      <p>Id: Username:</p>
+      {% for user in users %}
+      	<span>{{ user.id }}. {{ user.username }}</span>
+      	<br>
+      {% endfor %}
+    </div>
 	<h1>List of tasks:</h1>
 	{% for task in tasks %}
-		<span>{{task.id}}. {{ task.content }}</span>
-		<a href="delete/{{task.id}}"><img src="{{ url_for('static', filename='delete.jpeg') }}"
-         width="16" height="16"></a>
-         <a href="edit/{{task.id}}"><img src="{{ url_for('static', filename='edit.png') }}"
-         width="16" height="16"></a>
-         {% if task.urgency %}
-         	<img src="{{ url_for('static', filename='important.png') }}" width="16" height="16">
-         {% else %}
-         	<img src="{{ url_for('static', filename='not important.png') }}" width="16" height="16">
-         {% endif %}
+		<span>{{task.id}}. {{ task.content }} task for {{ task.username }} in status: {{ task.status }}</span>
+		<a href="{{url_for('delete', id=task.id)}}"><img src="{{ url_for('static', filename='delete.jpeg') }}"
+        width="16" height="16"></a>
+	    <a href="{{url_for('edit', id=task.id)}}"><img src="{{ url_for('static', filename='edit.png') }}"
+	    width="16" height="16"></a>
+	    {% if task.urgency == 'True' %}
+	    	<img src="{{ url_for('static', filename='important.png') }}" width="16" height="16">
+	    {% else %}
+	    	<img src="{{ url_for('static', filename='not important.png') }}" width="16" height="16">
+	    {% endif %}
 		<br>
 	{% endfor %}
 	<h1>Add Task:</h1>
@@ -24,6 +34,10 @@
 		<p>
 			{{ form.task.label }}
 			{{ form.task() }}
+		</p>
+		<p>
+			{{ form.username.label }}
+			{{ form.username() }}
 		</p>
 		<p>
 			{{ form.urgency.label }}

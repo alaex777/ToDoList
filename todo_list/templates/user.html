@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>User</title>
+</head>
+<body>
+	<h1>Your tasks:</h1>
+	{% for task in tasks %}
+		<span>{{ task.content }}</span>
+	    {% if task.urgency %}
+	    	<img src="{{ url_for('static', filename='important.png') }}" width="16" height="16">
+	    {% else %}
+	    	<img src="{{ url_for('static', filename='not important.png') }}" width="16" height="16">
+	    {% endif %}
+	    {% if task.status == "Work in progress" %}
+	    	<a href="{{ url_for('complete', username=username, id=task.id) }}">Mark as complete</a>
+	    {% else %}
+	    	<span>Completed!</span>
+	    {% endif %}
+		<br>
+	{% endfor %}
+</body>
+</html>
